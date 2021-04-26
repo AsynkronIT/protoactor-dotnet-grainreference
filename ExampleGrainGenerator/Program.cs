@@ -14,7 +14,7 @@ var system = new ActorSystem()
         .WithProtoMessages(ExampleGrainGenerator.ProtosReflection.Descriptor))
     .WithCluster(ClusterConfig
         .Setup("MyCluster", new ConsulProvider(new ConsulProviderConfig()), new PartitionIdentityLookup())
-        .WithMyGrainsKinds()
+        .WithExampleGrainsKinds()
     );
 
 await system

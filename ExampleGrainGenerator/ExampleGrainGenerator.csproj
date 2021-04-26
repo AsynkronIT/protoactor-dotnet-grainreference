@@ -6,18 +6,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Grpc.Tools" Version="2.37.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
       <PackageReference Include="Proto.Cluster" Version="0.16.1-alpha.0.80" />
       <PackageReference Include="Proto.Cluster.Consul" Version="0.16.1-alpha.0.80" />
       <PackageReference Include="Proto.Remote.GrpcCore" Version="0.16.1-alpha.0.80" />
-      <PackageReference Include="ProtoGrainGenerator" Version="0.16.1-alpha.0.98" />
+      <PackageReference Include="ProtoGrainGenerator" Version="0.17.1-alpha.0.21" />
     </ItemGroup>
 
     <ItemGroup>
-      <Protobuf Include="protos.proto" />
+        <ProtoGrain 
+                Include="protos.proto" 
+                AdditionalImportDirs=".;..\..\protobuf" 
+                TemplateFiles="template1.handlebars;prototemplate.handlebars" />
     </ItemGroup>
 
 </Project>

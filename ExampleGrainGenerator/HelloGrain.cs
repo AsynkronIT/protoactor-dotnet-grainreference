@@ -11,7 +11,7 @@ class HelloGrain : HelloGrainBase
 
     public HelloGrain(IContext ctx) : base(ctx)
     {
-    }
+    } 
 
     public override Task OnStarted()
     {
@@ -20,15 +20,15 @@ class HelloGrain : HelloGrainBase
         return CompletedTask;
     }
 
-    public override async Task<HelloResponse> SayHello(HelloRequest request) =>
-        new()
+    public override Task<HelloResponse> SayHello(HelloRequest request) =>
+        FromResult(new HelloResponse()
         {
             Message = $"Hello {request.Name}, pretty cool, right?"
-        };
+        });
 
-    public override async Task<GetCurrentStateResponse> GetCurrentState(GetCurrentStateRequest request) =>
-        new()
+    public override Task<GetCurrentStateResponse> GetCurrentState(GetCurrentStateRequest request) =>
+        FromResult(new GetCurrentStateResponse()
         {
             State = _state
-        };
+        });
 }
