@@ -32,9 +32,13 @@ namespace {{CsNamespace}}
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            //foreach message in messages
-            //  foreach field in fields
-            new pbr::GeneratedClrTypeInfo(typeof(global::{{CsNamespace}}.{{Name}}), global::{{CsNamespace}}.{{Name}}.Parser, new[]{ "Name" }, null, null, null, null)
+            {{#each Messages}}
+            new pbr::GeneratedClrTypeInfo(typeof(global::{{../CsNamespace}}.{{Name}}), global::{{../CsNamespace}}.{{Name}}.Parser, new string[]{
+                {{#each Fields}}
+                "{{Name}}",
+                {{/each}}
+            }, null, null, null, null),
+            {{/each}}
           }));
     }
   }
@@ -96,15 +100,19 @@ namespace {{CsNamespace}}
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Name != other.Name) return false;
+      {{#each Fields}}
+      if ({{Name}} != other.{{Name}} ) return false;
+      {{/each}}
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      //TODO: check all fields
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      
+      {{#each Fields}}
+      if ({{Name}}.Length != 0) hash ^= {{Name}}.GetHashCode();
+      {{/each}}
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -120,10 +128,11 @@ namespace {{CsNamespace}}
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      //TODO: emit field
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      {{#each Fields}}
+      if ({{Name}}.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize({{Name}});
       }
+      {{/each}}
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -135,9 +144,11 @@ namespace {{CsNamespace}}
       if (other == null) {
         return;
       }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
+      {{#each Fields}}
+      if (other.{{Name}}.Length != 0) {
+        {{Name}} = other.{{Name}};
       }
+      {{/each}}
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
