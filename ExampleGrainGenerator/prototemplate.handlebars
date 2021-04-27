@@ -1,9 +1,9 @@
 #pragma warning disable 1591, 0612, 3021
-
 using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
+
 namespace {{CsNamespace}} 
 {
 
@@ -45,7 +45,7 @@ namespace {{CsNamespace}}
 
   //foreach message in messages
   {{#each Messages}}
-  public sealed partial class {{Name}} : pb::IMessage<{{Name}}> , pb::IBufferMessage
+  public sealed partial class {{Name}} : pb::IMessage<{{Name}}> //, pb::IBufferMessage
   {
     private static readonly pb::MessageParser<{{Name}}> _parser = new pb::MessageParser<{{Name}}>(() => new {{Name}}());
     private pb::UnknownFieldSet _unknownFields;
@@ -67,8 +67,17 @@ namespace {{CsNamespace}}
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public {{Name}}({{Name}} other) : this() {
+        //aProp_ = other.aProp_ != null ? other.aProp_.Clone() : null;
+        //intProp_ = other.intProp_;
+        //bools_ = other.bools_.Clone();
+
       {{#each Fields}}
-      {{Name}}_ = other.{{Name}}_;
+      {{#StringEquality CsharpTypeName 'String'}}
+      {{Name}}_ = other.{{Name}}_?.Clone(); //{{CsharpTypeName}}
+      {{else}}
+      {{Name}}_ = other.{{Name}}_; //{{CsharpTypeName}}
+      {{/StringEquality}}
+      
       {{/each}}
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }

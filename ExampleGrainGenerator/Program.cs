@@ -21,6 +21,8 @@ await system
     .Cluster()
     .StartMemberAsync();
 
+var b = new Bbb(); 
+
 //how should factories of interface to impl look?
 //currently a hacky static factory
 Grains.Factory<HelloGrainBase>.Create = (c, _, _) => new HelloGrain(c);

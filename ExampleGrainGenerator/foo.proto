@@ -1,0 +1,12 @@
+syntax = "proto3";
+package ExampleGrains;
+option csharp_namespace = "ExampleGrainGenerator";
+
+message Aaa {
+  string name = 1;
+}
+message Bbb {
+  Aaa AProp = 1;
+  int32 IntProp = 2;
+  repeated bool Bools = 3;
+}
