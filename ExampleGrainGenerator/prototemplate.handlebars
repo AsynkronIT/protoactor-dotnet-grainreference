@@ -1,4 +1,5 @@
 #pragma warning disable 1591, 0612, 3021
+using System;
 using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
@@ -72,7 +73,7 @@ namespace {{CsNamespace}}
         //bools_ = other.bools_.Clone();
 
       {{#each Fields}}
-      {{#StringEquality CsharpTypeName 'String'}}
+      {{#StringEquality TypeKind 'message'}}
       {{Name}}_ = other.{{Name}}_?.Clone(); //{{CsharpTypeName}}
       {{else}}
       {{Name}}_ = other.{{Name}}_; //{{CsharpTypeName}}
@@ -88,9 +89,9 @@ namespace {{CsNamespace}}
     {{#each Fields}}
     /// <summary>Field number for the "{{Name}}" field.</summary>
     public const int {{Name}}FieldNumber = {{Number}};
-    private string {{Name}}_ = "";
+    private {{CsharpTypeName}} {{Name}}_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string {{Name}} {
+    public {{CsharpTypeName}} {{Name}} {
       get { return {{Name}}_; }
       set {
         {{Name}}_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -120,7 +121,12 @@ namespace {{CsNamespace}}
       int hash = 1;
       
       {{#each Fields}}
+      {{#StringEquality TypeKind 'string'}}
       if ({{Name}}.Length != 0) hash ^= {{Name}}.GetHashCode();
+      {{else}}
+      hash ^= {{Name}}.GetHashCode();
+      {{/StringEquality}}
+
       {{/each}}
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -138,9 +144,11 @@ namespace {{CsNamespace}}
     public int CalculateSize() {
       int size = 0;
       {{#each Fields}}
+
       if ({{Name}}.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize({{Name}});
       }
+
       {{/each}}
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();

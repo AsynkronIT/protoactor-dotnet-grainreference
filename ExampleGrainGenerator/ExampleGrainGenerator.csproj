@@ -13,7 +13,7 @@
       <PackageReference Include="Proto.Cluster" Version="0.16.1-alpha.0.80" />
       <PackageReference Include="Proto.Cluster.Consul" Version="0.16.1-alpha.0.80" />
       <PackageReference Include="Proto.Remote.GrpcCore" Version="0.16.1-alpha.0.80" />
-      <PackageReference Include="ProtoGrainGenerator" Version="0.17.1-alpha.0.26" />
+      <PackageReference Include="ProtoGrainGenerator" Version="0.17.1-alpha.0.27" />
     </ItemGroup>
 
     <ItemGroup>

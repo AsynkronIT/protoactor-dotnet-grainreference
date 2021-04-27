@@ -11,7 +11,7 @@ using static Proto.CancellationTokens;
 var system = new ActorSystem()
     .WithRemote(GrpcCoreRemoteConfig
         .BindToLocalhost()
-        .WithProtoMessages(ExampleGrainGenerator.ProtosReflection.Descriptor))
+        .WithProtoMessages(ExampleGrainsReflection.Descriptor))
     .WithCluster(ClusterConfig
         .Setup("MyCluster", new ConsulProvider(new ConsulProviderConfig()), new PartitionIdentityLookup())
         .WithExampleGrainsKinds()

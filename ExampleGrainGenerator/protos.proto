@@ -3,20 +3,21 @@ package ExampleGrains;
 option csharp_namespace = "ExampleGrainGenerator";
 
 message HelloRequest {
-  string name = 1;
+  string Name = 1;
 }
 message HelloResponse {
-  string message=1;
+  string Message=1;
 }
 
 message GetCurrentStateRequest {}
 message GetCurrentStateResponse {
-  HelloGrainState state = 1;
+  HelloGrainState State = 1;
 }
 
 message HelloGrainState {
-  string name =1;
-  int32 age = 2;
+  string Name =1;
+  int32 Age = 2;
+  bool Happy=3;
 }
 
 service HelloGrain {
