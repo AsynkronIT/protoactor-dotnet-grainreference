@@ -11,21 +11,16 @@ using static Proto.CancellationTokens;
 var system = new ActorSystem()
     .WithRemote(GrpcCoreRemoteConfig
         .BindToLocalhost()
-        .WithProtoMessages(ExampleGrainsReflection.Descriptor))
+        .WithProtoMessages(ExampleGrainGenerator.ProtosReflection.Descriptor))
     .WithCluster(ClusterConfig
         .Setup("MyCluster", new ConsulProvider(new ConsulProviderConfig()), new PartitionIdentityLookup())
-        .WithExampleGrainsKinds()
+        //This bit could be improved upon.
+        .WithClusterKind("HelloGrain", Props.FromProducer(() => new HelloGrainActor((ctx,id,kind) => new HelloGrain(ctx))))
     );
 
 await system
     .Cluster()
     .StartMemberAsync();
-
-var b = new Bbb(); 
-
-//how should factories of interface to impl look?
-//currently a hacky static factory
-Grains.Factory<HelloGrainBase>.Create = (c, _, _) => new HelloGrain(c);
 
 //how should access to generated grains look?
 //currently this is an extension on Cluster for each kind

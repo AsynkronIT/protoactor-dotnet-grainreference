@@ -10,17 +10,18 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Proto.Cluster" Version="0.16.1-alpha.0.80" />
-      <PackageReference Include="Proto.Cluster.Consul" Version="0.16.1-alpha.0.80" />
-      <PackageReference Include="Proto.Remote.GrpcCore" Version="0.16.1-alpha.0.80" />
-      <PackageReference Include="ProtoGrainGenerator" Version="0.17.1-alpha.0.27" />
+      <PackageReference Include="Proto.Cluster" Version="0.20.1-alpha.0.11" />
+      <PackageReference Include="Proto.Cluster.Consul" Version="0.20.1-alpha.0.11" />
+      <PackageReference Include="Proto.Remote.GrpcCore" Version="0.20.1-alpha.0.11" />
+      <PackageReference Include="Proto.Cluster.CodeGen" Version="0.18.1-alpha.0.10" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProtoGrain Include="protos.proto" AdditionalImportDirs=".;..\..\protobuf" TemplateFiles="template1.handlebars;prototemplate.handlebars" />
+        <ProtoGrain Include="protos.proto" AdditionalImportDirs=".;..\..\protobuf" />
     </ItemGroup>
 
     <ItemGroup>
+        <Protobuf Include="protos.proto" />
       <Protobuf Include="foo.proto" />
     </ItemGroup>
 
